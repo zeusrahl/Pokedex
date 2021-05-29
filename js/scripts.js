@@ -9,5 +9,9 @@ let pokemonList = [
 ];
 
 for (let i = 0; i < pokemonList.length; i++) {
-  console.log(pokemonList[i].name + " (height: " + pokemonList[i].height + ")");
-}
+  document.write('<p>' + pokemonList[i].name + " (height: " + pokemonList[i].height + ")");
+  if (pokemonList[i].height > 6) {
+    document.write(" - Wow, that's big!");
+  }
+  document.write("</p>");
+} //for loop to list name and height of pokemonList
