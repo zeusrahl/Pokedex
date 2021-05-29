@@ -7,3 +7,7 @@ let pokemonList = [
   {name: "Weedle", height: 3, types: ['bug', 'poison']},
   {name: "Pidgey", height: 3, types: ['flying', 'normal']}
 ];
+
+for (let i = 0; i < pokemonList.length; i++) {
+  console.log(pokemonList[i].name + " (height: " + pokemonList[i].height + ")");
+}
