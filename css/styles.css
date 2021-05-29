@@ -12,8 +12,23 @@ body {
   font-family: Roboto;
   font-weight: 400;
   font-size: 16px;
-  text-align: left;
+  line-height: 1.6;
+}
+
+.page-header {
+  display: flex;
+  width: 100%;
+  padding: 20px;
+}
+
+.home {
   max-width: 700px;
   margin: 0 auto;
-  line-height: 1.6;
+  padding: 0 20px;
+}
+
+.poke-list {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
