@@ -8,10 +8,10 @@ let pokemonList = [
   {name: "Pidgey", height: 3, types: ['flying', 'normal']}
 ];
 
-for (let i = 0; i < pokemonList.length; i++) {
-  document.write('<p class="poke-list">' + pokemonList[i].name + " (height: " + pokemonList[i].height + ")");
-  if (pokemonList[i].height > 6) {
+pokemonList.forEach(function(pokemon) {
+  document.write('<p class="poke-list">' + pokemon.name + ' (height: ' + pokemon.height + ')');
+  if (pokemon.height > 6) {
     document.write(" - Wow, that's big!");
   }
   document.write("</p>");
-} //for loop to list name and height of pokemonList
+}); //for loop to list name and height of pokemonList
