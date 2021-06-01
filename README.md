@@ -5,3 +5,7 @@ In this assignment, they wanted me to start my `README.md` so that I can start t
 ### Lesson 1.3
 I worked on presenting the pokèmon I added to my list. I also added a header, picking the pokèmon yellow as the banner color, and a common black color for the lettering.
 I will be working on ideas for making the project look nicer.
+### Lesson 1.5
+In this lesson, I worked on adding an IIFE for the pokèmon list and some functions in the IIFE for adding a pokèmon (`add`) and calling the items from the list (`getAll`).
+
+While working on building a filter for the `add` function, I discovered that I could specify looking for key elements in the `Object.keys` of the given array by using the keyword `in`.

@@ -1,4 +1,6 @@
+//building of the IIFE of the pokemonRepository
 let pokemonRepository = (function () {
+  //the list of all the pokemon
   let pokemonList = [
     {name: "Bulbasaur", height: 0.7, types: ['grass', 'poison']},
     {name: "Charmander", height: 0.6, types: 'fire'},
@@ -9,12 +11,19 @@ let pokemonRepository = (function () {
     {name: "Pidgey", height: 0.3, types: ['flying', 'normal']}
   ];
 
+  //a call for all pokemon in the list
   function getAll() {
     return  pokemonList;
   }
 
+  //a function to add pokemon. Need to add varification that the pokemon meets requirements of name, height, and type.
   function add(pokemon) {
-    pokemonList.push(pokemon);
+    if ((typeof pokemon === "object") && (("name" && "height" && "types") in Object.keys(pokemon))) {
+      pokemonList.push(pokemon);
+    }
+    else {
+      alert("This does not have the right information. Please try again.");
+    }
   }
 
   return {
@@ -23,6 +32,7 @@ let pokemonRepository = (function () {
   };
 }())
 
+//A loop to list all known pokemon in the IIFE list
 pokemonRepository.getAll().forEach(function(pokemon) {
   document.write('<p class="poke-list">' + pokemon.name + ' (height: ' + pokemon.height + ')');
   if (pokemon.height > 0.6) {
