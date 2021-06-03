@@ -18,7 +18,7 @@ let pokemonRepository = (function () {
 
   //a function to add pokemon. Need to add varification that the pokemon meets requirements of name, height, and type.
   function add(pokemon) {
-    if ((typeof pokemon === "object") && (("name" && "height" && "types") in Object.keys(pokemon))) {
+    if ((typeof pokemon === "object") && Object.keys(pokemon).includes('name', 'height', 'types')) {
       pokemonList.push(pokemon);
     }
     else {
