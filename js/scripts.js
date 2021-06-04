@@ -26,21 +26,26 @@ let pokemonRepository = (function () {
     }
   }
 
+  function addListItem(pokemon) {
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('button-class');
+    listItem.appendChild(button);
+    pokemonList.appendChild(listItem);
+  }
+
   return {
     add: add,
     getAll: getAll,
+    addListItem: addListItem,
   };
 }())
 
 //A loop to list all known pokemon in the IIFE list
 pokemonRepository.getAll().forEach(function(pokemon) {
-  let choice = document.querySelector('.pokemon-list');
-  let listItem = document.createElement('li');
-  let button = document.createElement('button');
-  button.innerText = pokemon.name;
-  button.classList.add('list-item');
-  listItem.appendChild(button);
-  choice.appendChild(listItem);
+  pokemonRepository.addListItem(pokemon);
   // document.write('<p class="poke-list">' + pokemon.name + ' (height: ' + pokemon.height + ')');
   // if (pokemon.height > 0.6) {
   //   document.write(" - Wow, that's big!");

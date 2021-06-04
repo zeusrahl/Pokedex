@@ -34,10 +34,14 @@ body {
   padding: 0 20px;
 }
 
-.list-item {
+.pokemon-list {
+  list-style-type: none;
+}
+
+.button-class {
   display: inline-block;
-  background-color: #ee1515;
-  color: #222224;
+  background-color: #222224;
+  color: #f0f0f0;
   width: 100%;
   margin: 0 auto;
   padding: 1em;
