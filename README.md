@@ -9,3 +9,5 @@ I will be working on ideas for making the project look nicer.
 In this lesson, I worked on adding an IIFE for the pokèmon list and some functions in the IIFE for adding a pokèmon (`add`) and calling the items from the list (`getAll`).
 
 While working on building a filter for the `add` function, I discovered that I could specify looking for key elements in the `Object.keys` of the given array by using the keyword `in`.
+### Lesson 1.6
+Going through the assignment, before getting to the task at the bottom, the module asked that we build a list of buttons using the JavaScript code for `appendChild` and `createElement` in our `forEach` loop. It tooke me a while, but with some good searching and refreshing my knowledge, I was able to sync it correctly. I'm trying to stay in the color scheme of the Pokèmon show, but the red from the Pokèball is a sharp color for the background of the list. I will likely change this. I'm considering making the background color the black of the pokèball and the lettering the "white" of the pokèball. I'll come back to this in the next time I work on this list.

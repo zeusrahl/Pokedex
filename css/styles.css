@@ -33,3 +33,13 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
+
+.list-item {
+  display: inline-block;
+  background-color: #ee1515;
+  color: #222224;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1em;
+  text-align: left;
+}

@@ -34,9 +34,16 @@ let pokemonRepository = (function () {
 
 //A loop to list all known pokemon in the IIFE list
 pokemonRepository.getAll().forEach(function(pokemon) {
-  document.write('<p class="poke-list">' + pokemon.name + ' (height: ' + pokemon.height + ')');
-  if (pokemon.height > 0.6) {
-    document.write(" - Wow, that's big!");
-  }
-  document.write("</p>");
+  let choice = document.querySelector('.pokemon-list');
+  let listItem = document.createElement('li');
+  let button = document.createElement('button');
+  button.innerText = pokemon.name;
+  button.classList.add('list-item');
+  listItem.appendChild(button);
+  choice.appendChild(listItem);
+  // document.write('<p class="poke-list">' + pokemon.name + ' (height: ' + pokemon.height + ')');
+  // if (pokemon.height > 0.6) {
+  //   document.write(" - Wow, that's big!");
+  // }
+  // document.write("</p>");
 });
