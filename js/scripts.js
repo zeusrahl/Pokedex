@@ -27,13 +27,29 @@ let pokemonRepository = (function () {
   }
 
   function addListItem(pokemon) {
+    //calling the '.pokemon-list' class for the <ul> element.
     let pokemonList = document.querySelector('.pokemon-list');
+    //creating a list item
     let listItem = document.createElement('li');
+    //create a 'button' item.
     let button = document.createElement('button');
+    //as the function cycles, the name will be displayed
     button.innerText = pokemon.name;
+    //each button will have the class: .button-class, using the css formatting.
     button.classList.add('button-class');
+    //adding each button to the <li>
     listItem.appendChild(button);
+    //adding each <li> to the <ul>
     pokemonList.appendChild(listItem);
+    //Upon clicking the 'button', the console log should show the details of the pokemon. Calls the 'showDetail' function below.
+    button.addEventListener('click', function() {
+      showDetails(pokemon);
+    });
+  }
+
+  //showing the details of the pokemon
+  function showDetails(pokemon) {
+    console.log("Name: " + pokemon.name + ", height: " + pokemon.height + ", types: " + pokemon.types);
   }
 
   return {
