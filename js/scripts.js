@@ -42,7 +42,8 @@ let pokemonRepository = (function () {
     //adding each <li> to the <ul>
     pokemonList.appendChild(listItem);
     //Upon clicking the 'button', the console log should show the details of the pokemon. Calls the 'showDetail' function below.
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function(event) {
+      preventDefault(event);
       showDetails(pokemon);
     });
   }
