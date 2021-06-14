@@ -43,17 +43,22 @@ let pokemonRepository = (function () {
 
   //showing the details of the pokemon
   function showDetails(pokemon) {
+    // loadDetails(pokemon).then(showModal(pokemon, 'Name: ' + pokemon.name + ', height: ' + pokemon.height + ', types: ' + pokemon.types)
     loadDetails(pokemon).then(function () {
+      text = "height: " + pokemon.height;
+      img = pokemon.imageUrl;
+      showModal(pokemon.name, text, img);
       console.log(pokemon);
     });
-    console.log(
-      "Name: " +
-        pokemon.name +
-          ", height: " +
-            pokemon.height +
-              ", types: " +
-                pokemon.types
-    );
+
+    // console.log(
+    //   "Name: " +
+    //     pokemon.name +
+    //       ", height: " +
+    //         pokemon.height +
+    //           ", types: " +
+    //             pokemon.types
+    // );
   }
 
   function loadList() {
@@ -99,6 +104,120 @@ let pokemonRepository = (function () {
   function hideLoadingMessage() {
     document.querySelector(".loading-message").innerHTML = "";
   }
+
+  let modalContainer = document.querySelector('#modal-container');
+  function showModal(title, text, img) {
+    // Clear all existing modal content
+    modalContainer.innerHTML = '';
+    let modal = document.createElement('div');
+    modal.classList.add('modal');
+
+    // Add the new modal content
+    let closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'Close';
+    // Add closing modal with the "close" button
+    closeButtonElement.addEventListener('click', hideModal);
+
+    let titleElement = document.createElement('h1');
+    titleElement.innerText = title;
+
+    let contentElement = document.createElement('p');
+    contentElement.innerText = text;
+
+    let imgElement = document.createElement('img');
+    imgElement.src = img;
+
+    let footerElement = document.createElement('footer');
+
+    let nextBtn = document.createElement('button');
+    nextBtn.innerText = 'Next';
+    let prevBtn = document.createElement('button');
+    prevBtn.innerText = 'Previous';
+
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(titleElement);
+    modal.appendChild(contentElement);
+    modal.appendChild(imgElement);
+    modal.appendChild(footerElement);
+    footerElement.appendChild(prevBtn);
+    footerElement.appendChild(nextBtn);
+    modalContainer.appendChild(modal);
+
+    modalContainer.classList.add('is-visible');
+  }
+
+  let dialogPromiseReject; // This can be set later, by showDialog
+
+  function hideModal() {
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.classList.remove('is-visible');
+
+    if (dialogPromiseReject) {
+      dialogPromiseReject();
+      dialogPromiseReject = null;
+    }
+  }
+
+  function showDialog(title, text) {
+    showModal(title, text);
+
+    // we want to add a confirm and cancel buttom to the modal
+    let modal = modalContainer.querySelector('.modal');
+
+    let confirmButton = document.createElement('button');
+    confirmButton.classList.add('modal-confirm');
+    confirmButton.innerText = 'Confirm';
+
+    let cancelButton = document.createElement('button');
+    cancelButton.classList.add('modal-cancel');
+    cancelButton.innerText = 'Cancel';
+
+    modal.appendChild(confirmButton);
+    modal.appendChild(cancelButton);
+
+    //we want to focus the confirmButton so that the use can simply press Enter
+    confirmButton.focus();
+    return new Promise((resolve,reject) => {
+      cancelButton.addEventListener('click', hideModal);
+      confirmButton.addEventListener('click', () => {
+        dialogPromiseReject = null; // Reset this
+        hideModal();
+        resolve();
+      });
+       // This can be used to reject from other functions
+      dialogPromiseReject = reject;
+    });
+  }
+
+  // document.querySelector('#show-dialog').addEventListener('click', () => {
+  //   showDialog('Confirm action', 'Are you sure you want to do this?').then(function() {
+  //     alert('confirmed!');
+  //   }, () => {
+  //     alert('not confirmed');
+  //   });
+  // });
+
+    // Close the modal with the ESC button
+    window.addEventListener('keydown', (e) => {
+      let modalContainer = document.querySelector('#modal-container');
+      if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+        hideModal();
+      }
+    })
+    // Close by clicking outside window
+    modalContainer.addEventListener('click', (e) => {
+      // Since this is also triggered when clicking INSIDE the modal
+      // We only want to close if the user clicks directly on the overlay
+      let target = e.target;
+      if (target === modalContainer) {
+        hideModal();
+      }
+    });
+
+  // document.querySelector('#show-modal').addEventListener('click', () => {
+  //   showModal('Modal title', 'This is the modal content!');
+  // });
 
   return {
     add: add,
