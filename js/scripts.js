@@ -11,7 +11,7 @@ let pokemonRepository = (function () {
 
   //a function to add pokemon. Need to add varification that the pokemon meets requirements of name, height, and type.
   function add(pokemon) {
-    if ((typeof pokemon === "object") && Object.keys(pokemon).includes('name', 'detailsUrl')) {
+    if (typeof pokemon === "object" && Object.keys(pokemon).includes('name', 'detailsUrl')) {
       pokemonList.push(pokemon);
     }
     else {
@@ -45,10 +45,9 @@ let pokemonRepository = (function () {
   function showDetails(pokemon) {
     // loadDetails(pokemon).then(showModal(pokemon, 'Name: ' + pokemon.name + ', height: ' + pokemon.height + ', types: ' + pokemon.types)
     loadDetails(pokemon).then(function () {
-      text = "height: " + pokemon.height;
-      img = pokemon.imageUrl;
-      showModal(pokemon.name, text, img);
-      console.log(pokemon);
+      // text = "height: " + pokemon.height;
+      // img = pokemon.imageUrl;
+      showModal(pokemon);
     });
 
     // console.log(
@@ -88,6 +87,7 @@ let pokemonRepository = (function () {
     }).then(function (details) {
       // Now we add the details to the item
       hideLoadingMessage();
+      item.name = details.name;
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
       item.types = details.types;
@@ -97,8 +97,34 @@ let pokemonRepository = (function () {
     });
   };
 
-  function showLoadingMessage() {
-    document.querySelector(".loading-message").innerHTML = "Loading Pokémon";
+  function showNextPokemon(pokemon) {
+    const url = pokemon.detailsUrl.slice(0, 34);
+    const pokemonID =
+      parseInt(pokemon.detailsUrl.split("pokemon/")[1].split("/")[0]) + 1;
+    if (pokemonID == 899) {
+      pokemon.detailsUrl = url + '10001';
+      } else if (pokemonID > 10220) {
+        pokemon.detailsUrl = url + '10220';
+        alert('You have reached the end of the list');
+      } else {
+        pokemon.detailsUrl = url + pokemonID;
+      }
+    showDetails(pokemon);
+  }
+
+  function showPrevPokemon(pokemon) {
+    const url = pokemon.detailsUrl.slice(0, 34);
+    const pokemonID =
+      parseInt(pokemon.detailsUrl.split("pokemon/")[1].split("/")[0]) - 1;
+    if (pokemonID == 10000) {
+      pokemon.detailsUrl = url + '898';
+      } else if (pokemonID < 1) {
+        pokemon.detailsUrl = url + '1';
+        alert('You have reached the beginning of the list');
+      } else {
+        pokemon.detailsUrl = url + pokemonID;
+      }
+    showDetails(pokemon);
   }
 
   function hideLoadingMessage() {
@@ -106,7 +132,7 @@ let pokemonRepository = (function () {
   }
 
   let modalContainer = document.querySelector('#modal-container');
-  function showModal(title, text, img) {
+  function showModal(pokemon) {
     // Clear all existing modal content
     modalContainer.innerHTML = '';
     let modal = document.createElement('div');
@@ -120,18 +146,23 @@ let pokemonRepository = (function () {
     closeButtonElement.addEventListener('click', hideModal);
 
     let titleElement = document.createElement('h1');
-    titleElement.innerText = title;
+    titleElement.innerText = pokemon.name;
 
     let contentElement = document.createElement('p');
-    contentElement.innerText = text;
+    contentElement.innerText = "height: " + pokemon.height;
 
     let imgElement = document.createElement('img');
-    imgElement.src = img;
+    imgElement.src = pokemon.imageUrl;
 
     let footerElement = document.createElement('footer');
 
     let nextBtn = document.createElement('button');
     nextBtn.innerText = 'Next';
+    nextBtn.addEventListener("click", function() {
+      // preventDefault(event);
+      showNextPokemon(pokemon);
+    });
+
     let prevBtn = document.createElement('button');
     prevBtn.innerText = 'Previous';
 
