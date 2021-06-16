@@ -127,6 +127,10 @@ let pokemonRepository = (function () {
     showDetails(pokemon);
   }
 
+  function showLoadingMessage() {
+    document.querySelector(".loading-message").innerHTML = "Loading Pokémon";
+  }
+
   function hideLoadingMessage() {
     document.querySelector(".loading-message").innerHTML = "";
   }
@@ -165,6 +169,10 @@ let pokemonRepository = (function () {
 
     let prevBtn = document.createElement('button');
     prevBtn.innerText = 'Previous';
+    prevBtn.addEventListener("click", function() {
+      // preventDefault(event);
+      showPrevPokemon(pokemon);
+    })
 
     modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
