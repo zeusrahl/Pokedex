@@ -3,29 +3,76 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"><!--normalize-->
-    <link rel="preconnect" href="https://fonts.gstatic.com"><!--part of google font linkk-->
-    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet"><!--font url google fonts:-->
+    <link rel="preconnect" href="https://fonts.gstatic.com"><!--part of google font linkk -->
+    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet"> <!--font url google fonts: Roboto-->
     <title>Pokèdex</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
   </head>
   <body>
+    <!-- navigation bar -->
     <header class="page-header">
-      <h1>EDK's Pokèdex</h1>
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="index.html">EDK's Pokédex</a><!-- add an image instead of title? -->
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="searchIn" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
     </header>
+
+
+    <!-- Main body of document -->
     <main class="home">
-      <h2>EDK's Pokèmon</h2>
-      <p>
-        Pokèmon. What are they? Where did the come from? Ultimately, who cares. They are awesome creatures with special supernatural powers. Many years ago, someone made a pokèball, a specialized designed tool that captures and preserves pokèmon. Once captured, the owner of the pokèball is able to call the pokèmon to train, then compete in tournaments. Here is the list of pokèmon that EDK has found and captured. In this list is the height of EDK's captured pokèmon.
-      </p>
+      <h2>EDK's Pokémon</h2>
       <!-- <button id='show-modal'>Show Modal</button>
       <button id='show-dialog'>Show dialog</button> -->
-      <div id='modal-container'></div>
+
+      <!-- modal -->
+      <!-- old modal
+      <div id='modal-container'></div> -->
+      <!-- new modal -->
+      <div
+           class="modal fade"
+           id="pokemonModal"
+           tabindex="-1"
+           role="dialog"
+           aria-labelledby="pokemonModalLabel"
+           area-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="pokemonModalLabel"></h5>
+              <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class='modal-body'></div>
+            <div class="modal-footer"></div>
+          </div>
+        </div>
+      </div>
+
       <p class = "loading-message"></p>
-      <ul class='pokemon-list'></ul>
+      <ul class='list-group pokemon-class'></ul>
     </main>
+
+    <footer></footer>
+    <!-- scripts -->
+<!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<!-- Polyfills -->
     <script src="js/promise-polyfill.js"></script>
     <script src="js/fetch-polyfill.js"></script>
+<!-- JS file -->
     <script src="js/scripts.js"></script>
   </body>
 </html>
