@@ -3,9 +3,20 @@
 }
 
 header, .navbar-brand{
-  background-color: #ffcb05; /*pokemon yellow */
+  background-color: #3D7DCA; /*pokemon yellow */
   color: #3D7DCA;
   padding: 20px;
+}
+
+.btn-warning {
+  background-color: #ffcb05;
+  color: #3D7DCA;
+  transition-duration: 0.4s;
+}
+
+.btn-warning:hover {
+  background: rgba(255,222,94,.9);
+  color: rgba(24,50,82,0.5);
 }
 
 body {
