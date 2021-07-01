@@ -86,11 +86,11 @@ let pokemonRepository = (function () {
       p.weight = details.weight;
       p.types = [];
       for (var i=0; i < details.types.length; i++) {
-        p.types.push(details.types[i].type.name);
+        p.types.push(' ' + details.types[i].type.name);
       }
       p.abilities = [];
       for (var i=0; i < details.abilities.length; i++) {
-        p.abilities.push(details.abilities[i].ability.name);
+        p.abilities.push(' ' + details.abilities[i].ability.name);
       }
 
       return p;
@@ -143,19 +143,15 @@ let pokemonRepository = (function () {
   // let modalContainer = document.querySelector('#pokemonModal');
 
   function showModal(pokemon) {
-    let modalBody = document.querySelectorAll(".modal-body");
-    let modalTitle = document.querySelectorAll(".modal-title");
-    let modalHeader = document.querySelectorAll(".modal-header");
-    let modalFooter = document.querySelectorAll(".modal-footer")
+    let modalBody = document.querySelector(".modal-body");
+    let modalTitle = document.querySelector(".modal-title");
+    let modalHeader = document.querySelector(".modal-header");
+    let modalFooter = document.querySelector(".modal-footer")
 
     //clear all modal content
     modalBody.innerHTML = '';
     modalTitle.innerHTML = '';
     modalFooter.innerHTML = '';
-
-    //Pokemon name
-    let nameElement = document.createElement('h1');
-    nameElement.innerText = pokemon.name;
 
 
     //pokemon types
@@ -202,7 +198,7 @@ let pokemonRepository = (function () {
       showPrevPokemon(pokemon);
     })
     //append all elements created to the modal
-    modalTitle.appendChild(nameElement);
+    modalTitle.innerText = pokemon.name;
     modalBody.appendChild(pokTypes);
     modalBody.appendChild(pokAbilities);
     modalBody.appendChild(heightElement);
