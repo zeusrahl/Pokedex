@@ -22,17 +22,23 @@ let pokemonRepository = (function () {
 
   function addListItem(pokemon) {
     //calling the '.pokemon-list' class for the <ul> element.
-    let pokemonList = $('.list-group');
+    let pokemonList = document.querySelector('.list-group');
     //creating a list item
-    let listItem = $('<li class="list-group-item list-group-item-acition"></li>');
+    let listItem = document.createElement('li');
+    listItem.classList.add("list-group-item", "list-group-item-acition");
     //create a 'button' item.
-    let button = $('<button class="btn btn-outline-warning btn-lg btn-block" data-target="#pokemonModal" data-toggle="modal" style="color:#003A70">' + pokemon.name + '</button>');
+    let button = document.createElement('button');
+    button.classList.add('btn', 'btn-outline-warning', 'btn-lg', 'btn-block');
+    button.setAttribute('data-target','#pokemonModal');
+    button.setAttribute('data-toggle','modal');
+    button.setAttribute('color','#003A70');
+    button.innerText = pokemon.name;
     //adding each button to the <li>
-    listItem.append(button);
+    listItem.appendChild(button);
     //adding each <li> to the <ul>
-    pokemonList.append(listItem);
+    pokemonList.appendChild(listItem);
     //Upon clicking the 'button', the console log should show the details of the pokemon. Calls the 'showDetail' function below.
-    button.on('click', function() {
+    button.addEventListener('click', function() {
       // preventDefault(event);
       showDetails(pokemon);
     });
@@ -47,26 +53,6 @@ let pokemonRepository = (function () {
 
   function loadList() {
     showLoadingMessage();
-    // Stuck here. Would like some help transitioning to jQuery.
-  //   $.ajax(apiUrl, {dataType: 'json' }).then(function(responseJSON) {
-  //     hideLoadingMessage();
-  //     responseJSON.each(function (i) {
-            // let pokemon = {
-            //   name: $(this).attr('name');
-            //   datailsUrl: $(this).attr('url');
-          // }
-        // }) {
-  //       let pokemon = {
-  //         name: item.name,
-  //         detailsUrl: item.url,
-  //       };
-  //       add(pokemon);
-  //     });
-  //   }).catch(function (e) {
-  //     hideLoadingMessage();
-  //     console.error(e);
-  //   });
-  // };
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
@@ -123,6 +109,7 @@ let pokemonRepository = (function () {
       } else if (pokemonID > 10220) {
         pokemon.detailsUrl = url + '10220';
         alert('You have reached the end of the list');
+
       } else {
         pokemon.detailsUrl = url + pokemonID;
       }
@@ -136,8 +123,9 @@ let pokemonRepository = (function () {
     if (pokemonID == 10000) {
       pokemon.detailsUrl = url + '898';
       } else if (pokemonID < 1) {
-        pokemon.detailsUrl = url - '1';
+        pokemon.detailsUrl = url + '1';
         alert('You have reached the beginning of the list');
+        console.log(pokemon.detailsUrl);
       } else {
         pokemon.detailsUrl = url + pokemonID;
       }
@@ -145,49 +133,60 @@ let pokemonRepository = (function () {
   }
 
   function showLoadingMessage() {
-    $(".loading-message").html = "Loading Pokémon";
+    document.querySelector(".loading-message").innerHTML = "Loading Pokémon";
   }
 
   function hideLoadingMessage() {
-    $(".loading-message").html = "";
+    document.querySelector(".loading-message").innerHTML = "";
   }
 
   // let modalContainer = document.querySelector('#pokemonModal');
 
   function showModal(pokemon) {
-    let modalBody = $(".modal-body");
-    let modalTitle = $(".modal-title");
-    let modalHeader = $(".modal-header");
-    let modalFooter = $(".modal-footer")
+    let modalBody = document.querySelectorAll(".modal-body");
+    let modalTitle = document.querySelectorAll(".modal-title");
+    let modalHeader = document.querySelectorAll(".modal-header");
+    let modalFooter = document.querySelectorAll(".modal-footer")
 
     //clear all modal content
-    modalBody.empty();
-    modalTitle.empty();
-    modalFooter.empty();
+    modalBody.innerHTML = '';
+    modalTitle.innerHTML = '';
+    modalFooter.innerHTML = '';
 
     //Pokemon name
-    let nameElement = $('<h1>' + pokemon.name + '</h1>');
+    let nameElement = document.createElement('h1');
+    nameElement.innerText = pokemon.name;
 
 
     //pokemon types
-    let pokTypes = $('<p>' + 'Types: ' + pokemon.types + '</p>');
+    let pokTypes = document.createElement('p');
+    pokTypes.innerText = "Types: " + pokemon.types;
 
     // pokemon abilities
-    let pokAbilities = $('<p>' + 'Abilities: ' + pokemon.abilities + '</p>');
+    let pokAbilities = document.createElement('p');
+    pokAbilities.innerText = "Abilities: " + pokemon.abilities;
 
     //pokemon height
-    let heightElement = $('<p>' + 'Height: ' + pokemon.height + '</p>');
+    let heightElement = document.createElement('p');
+    heightElement.innerText = 'Height: ' + pokemon.height;
 
     //pokemon weight
-    let weightElement = $('<p>' + 'Weight: ' + pokemon.weight + '</p>');
+    let weightElement = document.createElement('p');
+    weightElement.innerText = 'Weight: ' + pokemon.weight;
 
     //pokemon image front
-    let pokImageFront = $('<img class="modal-img" alt="\'Front of \' + pokemon.name + \'.\'" style="width:50%">');
-    pokImageFront.attr('src', pokemon.imageUrlFront);
+    let pokImageFront = document.createElement('img');
+    pokImageFront.classList.add("modal-img");
+    pokImageFront.setAttribute("alt", "\'Front of \' + pokemon.name = \'.\'");
+    pokImageFront.setAttribute("style", "width:50%");
+    pokImageFront.setAttribute('src', pokemon.imageUrlFront);
 
     //pokemon image back
-    let pokImageBack = $('<img class="modal-img" alt="\'Back of \' + pokemon.name + \'.\'" style="width:50%">');
-    pokImageBack.attr('src', pokemon.imageUrlBack);
+    let pokImageBack = document.createElement('img');
+    pokImageBack.classList.add("modal-img");
+    pokImageBack.setAttribute("alt", "\'Front of \' + pokemon.name = \'.\'");
+    pokImageBack.setAttribute("style", "width:50%");
+    pokImageBack.setAttribute('src', pokemon.imageUrlBack);
 
     let nextBtn = document.createElement('button');
     nextBtn.innerText = 'Next';
@@ -203,15 +202,15 @@ let pokemonRepository = (function () {
       showPrevPokemon(pokemon);
     })
     //append all elements created to the modal
-    modalTitle.append(nameElement);
-    modalBody.append(pokTypes);
-    modalBody.append(pokAbilities);
-    modalBody.append(heightElement);
-    modalBody.append(weightElement);
-    modalBody.append(pokImageFront);
-    modalBody.append(pokImageBack);
-    modalFooter.append(prevBtn);
-    modalFooter.append(nextBtn);
+    modalTitle.appendChild(nameElement);
+    modalBody.appendChild(pokTypes);
+    modalBody.appendChild(pokAbilities);
+    modalBody.appendChild(heightElement);
+    modalBody.appendChild(weightElement);
+    modalBody.appendChild(pokImageFront);
+    modalBody.appendChild(pokImageBack);
+    modalFooter.appendChild(prevBtn);
+    modalFooter.appendChild(nextBtn);
 
     // $('#pokemonModal').modal('toggle');
   }
