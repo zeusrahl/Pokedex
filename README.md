@@ -1,6 +1,24 @@
 # EDK's Pokédex
 
-This is the beginning of my Pokèdex project. I anticipate that I will be able to learn how to adapt this for various different projects as it is about creating the JavaScript and calling an API. Building the API will be an enjoyable activity as well I do now know a lot about Pokèmon, so I wouldn't be able to adapt the API for myself. But I already have ideas on how to adapt this for D&D 5e.
+## Overview
+
+To build an app that calls on an external API to display a list of Pokédex. This app also opens a modal to view an individual pokémon's picture and stats.
+
+## Key Features
+
+- Load Data from an external source (API)
+- View a list of Items
+- on user action (e.g., by clicking on a list item), view details for that item
+
+## Built With:
+
+JavaScript
+
+---
+
+## Reflections
+
+This is the beginning of my Pokédex project. I anticipate that I will be able to learn how to adapt this for various different projects as it is about creating the JavaScript and calling an API. Building the API will be an enjoyable activity as well I do now know a lot about Pokémon, so I wouldn't be able to adapt the API for myself. But I already have ideas on how to adapt this for D&D 5e.
 
 ### Lesson 1.2
 
@@ -13,7 +31,7 @@ I will be working on ideas for making the project look nicer.
 
 ### Lesson 1.5
 
-In this lesson, I worked on adding an IIFE for the pokèmon list and some functions in the IIFE for adding a pokèmon (`add`) and calling the items from the list (`getAll`).
+In this lesson, I worked on adding an IIFE for the pokémon list and some functions in the IIFE for adding a pokémon (`add`) and calling the items from the list (`getAll`).
 
 While working on building a filter for the `add` function, I discovered that I could specify looking for key elements in the `Object.keys` of the given array by using the keyword `in`.
 
